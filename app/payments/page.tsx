@@ -61,72 +61,74 @@ export default function PaymentsPage() {
   )
 
   return (
-    <div className="space-y-6 p-6 pb-16">
-      <div className="space-y-0.5">
-        <h2 className="text-2xl font-bold tracking-tight">Payment Receipt Management</h2>
-        <p className="text-muted-foreground">
-          View and manage payment receipts for all transactions.
-        </p>
-      </div>
-      <Card>
-        <CardHeader>
-          <CardTitle>Payment Records</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0 mb-6">
-            <div className="flex-1">
-              <div className="relative">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  placeholder="Search by ICno or Mobile"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-8"
-                />
+    <div className="container mx-auto p-4">
+      <div className="space-y-6">
+        <div className="space-y-0.5">
+          <h2 className="text-2xl font-bold tracking-tight">Payment Receipt Management</h2>
+          <p className="text-muted-foreground">
+            View and manage payment receipts for all transactions.
+          </p>
+        </div>
+        <Card>
+          <CardHeader>
+            <CardTitle>Payment Records</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0 mb-6">
+              <div className="flex-1">
+                <div className="relative">
+                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Search by ICno or Mobile"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-8"
+                  />
+                </div>
               </div>
+              <DateRangePickerWithRange date={dateRange} setDate={setDateRange} />
+              <Button className="bg-[#ff4e00] hover:bg-[#ff6a00] text-white">
+                <Search className="mr-2 h-4 w-4" />
+                Search
+              </Button>
             </div>
-            <DateRangePickerWithRange date={dateRange} setDate={setDateRange} />
-            <Button className="bg-[#ff4e00] hover:bg-[#ff6a00] text-white">
-              <Search className="mr-2 h-4 w-4" />
-              Search
-            </Button>
-          </div>
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>ICno</TableHead>
-                  <TableHead>Mobile</TableHead>
-                  <TableHead>Amount</TableHead>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Start Date</TableHead>
-                  <TableHead>End Date</TableHead>
-                  <TableHead>Status</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredPayments.map((payment) => (
-                  <TableRow key={payment.id}>
-                    <TableCell>{payment.icno}</TableCell>
-                    <TableCell>{payment.mobile}</TableCell>
-                    <TableCell>${payment.amount.toFixed(2)}</TableCell>
-                    <TableCell>{format(payment.date, 'PPP')}</TableCell>
-                    <TableCell>{format(payment.startDate, 'PPP')}</TableCell>
-                    <TableCell>{format(payment.endDate, 'PPP')}</TableCell>
-                    <TableCell>
-                      <Badge 
-                        variant={payment.status === 'Completed' ? 'default' : payment.status === 'Pending' ? 'secondary' : 'destructive'}
-                      >
-                        {payment.status}
-                      </Badge>
-                    </TableCell>
+            <div className="rounded-md border">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>ICno</TableHead>
+                    <TableHead>Mobile</TableHead>
+                    <TableHead>Amount</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Start Date</TableHead>
+                    <TableHead>End Date</TableHead>
+                    <TableHead>Status</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
+                </TableHeader>
+                <TableBody>
+                  {filteredPayments.map((payment) => (
+                    <TableRow key={payment.id}>
+                      <TableCell>{payment.icno}</TableCell>
+                      <TableCell>{payment.mobile}</TableCell>
+                      <TableCell>${payment.amount.toFixed(2)}</TableCell>
+                      <TableCell>{format(payment.date, 'PPP')}</TableCell>
+                      <TableCell>{format(payment.startDate, 'PPP')}</TableCell>
+                      <TableCell>{format(payment.endDate, 'PPP')}</TableCell>
+                      <TableCell>
+                        <Badge 
+                          variant={payment.status === 'Completed' ? 'default' : payment.status === 'Pending' ? 'secondary' : 'destructive'}
+                        >
+                          {payment.status}
+                        </Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

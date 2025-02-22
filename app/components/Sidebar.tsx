@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/collapsible"
 
 const menuItems = [
-  { icon: Home, name: 'Dashboard', href: '/' },
+  { icon: Home, name: 'Dashboard', href: '/dashboard' },
   { icon: CreditCard, name: 'Payments', href: '/payments' },
   { icon: AlertCircle, name: 'Customer Issues', href: '/customer-issues' },
   { icon: MessageSquare, name: 'Complaints', href: '/complaints' },
